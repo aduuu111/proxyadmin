@@ -1,0 +1,1472 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "系统"
+    },
+    {
+      "name": "出站器"
+    },
+    {
+      "name": "用户系统"
+    },
+    {
+      "name": "规则系统"
+    }
+  ],
+  "paths": {
+    "/api/system/getInterFaces": {
+      "get": {
+        "summary": "获取系统网卡列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "系统"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/system/base/{ioOption}/{netOption}": {
+      "get": {
+        "summary": "获取服务器基本信息",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "系统"
+        ],
+        "parameters": [
+          {
+            "name": "ioOption",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "netOption",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/system/current/{ioOption}/{netOption}": {
+      "get": {
+        "summary": "获取服务器实时信息",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "系统"
+        ],
+        "parameters": [
+          {
+            "name": "ioOption",
+            "in": "path",
+            "description": "io选项",
+            "required": true,
+            "example": "all",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "netOption",
+            "in": "path",
+            "description": "net选项",
+            "required": true,
+            "example": "all",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/system/restart/{operation}": {
+      "post": {
+        "summary": "重启服务器/面板",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "系统"
+        ],
+        "parameters": [
+          {
+            "name": "operation",
+            "in": "path",
+            "description": "值为 GreenServer 表示重启代理程序 ，system 表示重启系统",
+            "required": true,
+            "example": "GreenServer",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/system/getIOOptions": {
+      "get": {
+        "summary": "获取IO选项",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "系统"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/system/getNetOptions": {
+      "get": {
+        "summary": "获取net选项",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "系统"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/out/createOutBound": {
+      "post": {
+        "summary": "添加一个出站器",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "出站器"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "出站器名称,不可重复"
+                  },
+                  "proxyUrl": {
+                    "type": "string",
+                    "description": "代理Url,可以未空,可以链式代理"
+                  },
+                  "eh": {
+                    "type": "string",
+                    "description": "指定用那个网卡出去"
+                  }
+                },
+                "required": [
+                  "name",
+                  "eh"
+                ]
+              },
+              "example": {
+                "name": "test",
+                "proxyUrl": "",
+                "eh": "192.168.50.11"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/out/getOutBoundsAll": {
+      "get": {
+        "summary": "获取所有出站器",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "出站器"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/out/editOutBound": {
+      "post": {
+        "summary": "编辑出站器",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "出站器"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "需要修改的出站器名称"
+                  },
+                  "proxyUrl": {
+                    "type": "string",
+                    "description": "代理url"
+                  },
+                  "eh": {
+                    "type": "string",
+                    "description": "出口网卡"
+                  }
+                },
+                "required": [
+                  "name",
+                  "eh"
+                ]
+              },
+              "example": {
+                "name": "test",
+                "proxyUrl": "socks5://1.1.1.1:1080",
+                "eh": "192.168.50.11"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/out/deleteOutBound": {
+      "get": {
+        "summary": "删除一个出站器",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "出站器"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "要删除的出站器名称",
+            "required": true,
+            "example": "test",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/out/getOutBoundInfo": {
+      "get": {
+        "summary": "获取出站器的当前连接数据",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "出站器"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "出站器名称",
+            "required": true,
+            "example": "test",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/out/createOutBounds": {
+      "post": {
+        "summary": "批量添加出站器",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "出站器"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "proxyUrl": {
+                      "type": "string"
+                    },
+                    "eh": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": [
+                {
+                  "name": "test",
+                  "proxyUrl": "",
+                  "eh": "192.168.50.11"
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/user/createUser": {
+      "post": {
+        "summary": "创建一个用户",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "用户系统"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enable": {
+                    "type": "boolean",
+                    "description": "是否启用"
+                  },
+                  "listenAddr": {
+                    "type": "string",
+                    "description": "监听地址，例如：192.168.1.2:1080"
+                  },
+                  "protocol": {
+                    "type": "string",
+                    "description": "用户使用的协议"
+                  },
+                  "deleteTime": {
+                    "type": "string",
+                    "description": "到期时间"
+                  },
+                  "maxSendByte": {
+                    "type": "integer",
+                    "description": "最大发送量 0为不限制"
+                  },
+                  "maxReceiveByte": {
+                    "type": "integer",
+                    "description": "最大接收量 0为不限制"
+                  },
+                  "sendByte": {
+                    "type": "integer",
+                    "description": "当前发送量  一般传0"
+                  },
+                  "receiveByte": {
+                    "type": "integer",
+                    "description": "当前接受量 一般传0"
+                  },
+                  "maxConnCount": {
+                    "type": "integer",
+                    "description": "最大连接。0为不限制"
+                  },
+                  "sendLimit": {
+                    "type": "integer",
+                    "description": "最大上行带宽。0为不限制，单位kb/s"
+                  },
+                  "receiveLimit": {
+                    "type": "integer",
+                    "description": "最大下行带宽。0为不限制，单位kb/s"
+                  },
+                  "rule": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "规则名称"
+                  },
+                  "out": {
+                    "type": "string",
+                    "description": "出站器名字"
+                  },
+                  "conf": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "username",
+                      "password"
+                    ],
+                    "description": "协议配置"
+                  },
+                  "info": {
+                    "type": "string",
+                    "description": "附加数据"
+                  }
+                },
+                "required": [
+                  "enable",
+                  "listenAddr",
+                  "protocol",
+                  "deleteTime",
+                  "maxSendByte",
+                  "maxReceiveByte",
+                  "sendByte",
+                  "receiveByte",
+                  "maxConnCount",
+                  "sendLimit",
+                  "receiveLimit",
+                  "rule",
+                  "out",
+                  "conf",
+                  "info"
+                ]
+              },
+              "example": {
+                "enable": true,
+                "listenAddr": "0.0.0.0:1876",
+                "protocol": "socks5",
+                "deleteTime": "2026-01-02 15:04:05",
+                "maxSendByte": 0,
+                "maxReceiveByte": 0,
+                "sendByte": 0,
+                "receiveByte": 0,
+                "maxConnCount": 0,
+                "sendLimit": 177,
+                "receiveLimit": 200,
+                "rule": [
+                  "all"
+                ],
+                "out": "test",
+                "conf": {
+                  "username": "abc",
+                  "password": "abc"
+                },
+                "info": "test"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/user/getUserAll": {
+      "get": {
+        "summary": "获取所有用户",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "用户系统"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/user/deleteUser": {
+      "get": {
+        "summary": "删除一个用户",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "用户系统"
+        ],
+        "parameters": [
+          {
+            "name": "lAddr",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "0.0.0.0:1876",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/user/editUser": {
+      "post": {
+        "summary": "编辑一个用户",
+        "deprecated": false,
+        "description": "详细参数说明请看创建用户api",
+        "tags": [
+          "用户系统"
+        ],
+        "parameters": [
+          {
+            "name": "lAddr",
+            "in": "query",
+            "description": "监听地址",
+            "required": true,
+            "example": "0.0.0.0:1877",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enable": {
+                    "type": "boolean"
+                  },
+                  "listenAddr": {
+                    "type": "string"
+                  },
+                  "protocol": {
+                    "type": "string"
+                  },
+                  "deleteTime": {
+                    "type": "string"
+                  },
+                  "maxSendByte": {
+                    "type": "integer"
+                  },
+                  "maxReceiveByte": {
+                    "type": "integer"
+                  },
+                  "sendByte": {
+                    "type": "integer"
+                  },
+                  "receiveByte": {
+                    "type": "integer"
+                  },
+                  "maxConnCount": {
+                    "type": "integer"
+                  },
+                  "sendLimit": {
+                    "type": "integer"
+                  },
+                  "receiveLimit": {
+                    "type": "integer"
+                  },
+                  "rule": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "out": {
+                    "type": "string"
+                  },
+                  "conf": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "username",
+                      "password"
+                    ]
+                  },
+                  "info": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "enable",
+                  "listenAddr",
+                  "protocol",
+                  "deleteTime",
+                  "maxSendByte",
+                  "maxReceiveByte",
+                  "sendByte",
+                  "receiveByte",
+                  "maxConnCount",
+                  "sendLimit",
+                  "receiveLimit",
+                  "rule",
+                  "out",
+                  "conf",
+                  "info"
+                ]
+              },
+              "example": {
+                "enable": true,
+                "listenAddr": "0.0.0.0:1877",
+                "protocol": "socks5",
+                "deleteTime": "2026-01-02 15:04:05",
+                "maxSendByte": 0,
+                "maxReceiveByte": 0,
+                "sendByte": 0,
+                "receiveByte": 0,
+                "maxConnCount": 0,
+                "sendLimit": 177,
+                "receiveLimit": 200,
+                "rule": [
+                  "test"
+                ],
+                "out": "test",
+                "conf": {
+                  "username": "abc",
+                  "password": "abc"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/user/getUserConnList": {
+      "get": {
+        "summary": "获取用户连接列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "用户系统"
+        ],
+        "parameters": [
+          {
+            "name": "lAddr",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "0.0.0.0:1082",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/user/createUsers": {
+      "post": {
+        "summary": "批量创建用户",
+        "deprecated": false,
+        "description": "详细参数说明请看   创建一个用户  api",
+        "tags": [
+          "用户系统"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "enable": {
+                      "type": "boolean"
+                    },
+                    "listenAddr": {
+                      "type": "string"
+                    },
+                    "protocol": {
+                      "type": "string"
+                    },
+                    "deleteTime": {
+                      "type": "string"
+                    },
+                    "maxSendByte": {
+                      "type": "integer"
+                    },
+                    "maxReceiveByte": {
+                      "type": "integer"
+                    },
+                    "sendByte": {
+                      "type": "integer"
+                    },
+                    "receiveByte": {
+                      "type": "integer"
+                    },
+                    "maxConnCount": {
+                      "type": "integer"
+                    },
+                    "sendLimit": {
+                      "type": "integer"
+                    },
+                    "receiveLimit": {
+                      "type": "integer"
+                    },
+                    "rule": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "out": {
+                      "type": "string"
+                    },
+                    "conf": {
+                      "type": "object",
+                      "properties": {
+                        "username": {
+                          "type": "string"
+                        },
+                        "password": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "username",
+                        "password"
+                      ]
+                    },
+                    "info": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "enable",
+                    "listenAddr",
+                    "protocol",
+                    "deleteTime",
+                    "maxSendByte",
+                    "maxReceiveByte",
+                    "sendByte",
+                    "receiveByte",
+                    "maxConnCount",
+                    "sendLimit",
+                    "receiveLimit",
+                    "rule",
+                    "out",
+                    "conf",
+                    "info"
+                  ]
+                }
+              },
+              "example": [
+                {
+                  "enable": true,
+                  "listenAddr": "0.0.0.0:1876",
+                  "protocol": "socks5",
+                  "deleteTime": "2026-01-02 15:04:05",
+                  "maxSendByte": 0,
+                  "maxReceiveByte": 0,
+                  "sendByte": 0,
+                  "receiveByte": 0,
+                  "maxConnCount": 0,
+                  "sendLimit": 177,
+                  "receiveLimit": 200,
+                  "rule": [
+                    "all",
+                    "test"
+                  ],
+                  "out": "test",
+                  "conf": {
+                    "username": "abc",
+                    "password": "abc"
+                  }
+                },
+                {
+                  "enable": true,
+                  "listenAddr": "0.0.0.0:1879",
+                  "protocol": "socks5",
+                  "deleteTime": "2026-01-02 15:04:05",
+                  "maxSendByte": 0,
+                  "maxReceiveByte": 0,
+                  "sendByte": 0,
+                  "receiveByte": 0,
+                  "maxConnCount": 0,
+                  "sendLimit": 177,
+                  "receiveLimit": 200,
+                  "rule": [
+                    "all"
+                  ],
+                  "out": "test",
+                  "conf": {
+                    "username": "abc",
+                    "password": "abc"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/user/EditUserDeleteTime": {
+      "get": {
+        "summary": "修改到期时间",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "用户系统"
+        ],
+        "parameters": [
+          {
+            "name": "lAddr",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deleteTime",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/rule/addRule": {
+      "post": {
+        "summary": "添加一条规则",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "规则系统"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "title": "规则名称"
+                  },
+                  "data": {
+                    "type": "string",
+                    "title": "规则详情"
+                  }
+                },
+                "required": [
+                  "name",
+                  "data"
+                ]
+              },
+              "example": {
+                "name": "all",
+                "data": "* = allow"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/rule/getRuleAll": {
+      "get": {
+        "summary": "获取所有规则",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "规则系统"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/rule/delRule": {
+      "get": {
+        "summary": "删除一条规则",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "规则系统"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "规则名字",
+            "required": false,
+            "example": "all",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/rule/editRule": {
+      "post": {
+        "summary": "修改一条规则",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "规则系统"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "data": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "data"
+                ]
+              },
+              "example": {
+                "name": "all",
+                "data": "* = black"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/rule/deleteRuleAll": {
+      "get": {
+        "summary": "删除所有规则",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "规则系统"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    },
+    "/api/rule/addRules": {
+      "post": {
+        "summary": "批量添加规则",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "规则系统"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": [
+                {
+                  "name": "all",
+                  "data": "* = allow"
+                },
+                {
+                  "name": "test",
+                  "data": "* = allow"
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "apikey-header-Auth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "apikey-header-Auth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Auth"
+      }
+    }
+  },
+  "servers": [],
+  "security": []
+}

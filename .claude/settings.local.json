@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --version:*)",
+      "Bash(npm --version:*)",
+      "Bash(pip install:*)",
+      "Bash(cat:*)",
+      "Bash(python init_db.py:*)",
+      "Bash(python main.py:*)",
+      "Bash(curl:*)",
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "Bash(python -m json.tool:*)",
+      "Bash(find:*)",
+      "Bash(python migrate_database.py:*)",
+      "Bash(cd:*)",
+      "Bash(dir)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(python:*)",
+      "Bash(taskkill:*)",
+      "Bash(powershell \"Stop-Process -Id 24080 -Force\")",
+      "Bash(powershell \"Stop-Process -Id 25536 -Force\")",
+      "Bash(powershell \"Get-Content UserList.vue | Select-Object -Last 50\")",
+      "Bash(timeout /t 5 /nobreak)",
+      "Bash(timeout:*)",
+      "Bash(powershell -Command \"$headers = @{''Content-Type''=''application/json''; ''auth''=''pak_RmrxXpqSzEGA0etV7fbS-_lqnNbqq3dV2RygoxkiIn8''}; $body = ''{\"\"username\"\":\"\"testuser003\"\",\"\"password\"\":\"\"Pass@123\"\",\"\"port\"\":10003,\"\"protocol\"\":\"\"socks5\"\",\"\"expire_days\"\":30,\"\"total_traffic_gb\"\":100,\"\"outbound_id\"\":1,\"\"rule_ids\"\":[1],\"\"email\"\":\"\"test@example.com\"\",\"\"remark\"\":\"\"Test\"\"}''; Invoke-RestMethod -Uri ''http://localhost:8000/api/external/users/provision'' -Method Post -Headers $headers -Body $body\")",
+      "Bash(dir:*)",
+      "Bash(ping:*)",
+      "Bash(powershell:*)",
+      "Bash(rm:*)",
+      "Bash(test:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

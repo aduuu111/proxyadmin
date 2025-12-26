@@ -1,0 +1,129 @@
+1系统
+1.1获取系统网卡列表/api/system/getInterFaces
+1.2获取服务器基本信息/api/system/base/{ioOption}/{netOption}
+1.3获取服务器实时信息/api/system/current/{ioOption}/{netOption}
+1.4获取服务器/面板/api/system/restart/{operation}
+1.5获取IO选项/api/system/getIOOptions
+1.6获取net选项/api/system/getNetOptions
+
+2出战器
+2.1添加一个出战器/api/out/createOutBound
+2.2获取所有出战器/api/out/getOutBoundsAll
+2.3编辑出战器/api/out/editOutBound
+2.4删除一个出站器/api/out/deleteOutBound
+2.5获取出站器当前连接数据/api/out/getOutBoundInfo
+
+3用户系统
+3.1创建一个用户/api/user/createUser
+3.2获取所有用户/api/user/getUserAll
+3.3删除一个用户/api/user/deleteUser
+3.4编辑一个用户/api/user/editUser
+3.5获取用户连接列表/api/user/getUserConnList
+3.6批量创建用户/api/user/createUsers
+3.7修改到期时间/api/user/EditUserDeleteTime
+
+4规则系统
+4.1添加一条规则/api/rule/addRule
+4.2获取所有规则/api/rule/getRuleAll
+4.3删除一条规则/api/rule/delRule
+4.4修改一条规则/api/rule/editRule
+4.5删除所有规则/api/rule/deleteRuleAll
+4.6批量添加规则/api/rule/addRules
+
+通常我们的核心步骤为
+1：获取系统网卡列表
+{
+    "code": 200,
+    "message": "ok",
+    "data": [
+        {
+            "ehName": "eth0",
+            "eh": "192.168.7.50",
+            "ip": "124.243.137.203"
+        }
+    ]
+}得到类似于这样的数据（这是服务器只有一个公网IP和内网IP）
+有可能是多组的，多组为每个网卡名一组eh和ip数据，其中IP为公网IP主要是给客户使用，eh为内网IP，主要用于服务器内部通信和功能实现。
+
+2：出站器功能
+创建一个出站器有多种方式这也是我们本个程序有趣的开发目的之一
+第一种本机出站器：
+{
+    "name": "test",
+    "proxyUrl": "",
+    "eh": "192.168.50.11"
+}
+功能：
+"name": 定义一个出站器的名称（这是唯一值不可重复，设计管理面板时候应该给一个排序和容易识别他的意义的方式），
+"proxyUrl": 为空，
+"eh": 为选择一个内网ip作为使用IP，如果此出站器作为后面的用户的出站器，则使用这个内网IP的外网ip与互联网进行通信
+
+第二种外网出站器
+{
+    "name": "socks",
+    "proxyUrl": "socks://user:password@ip:port",
+    "eh": "192.168.50.11"
+}
+{
+    "name": "http",
+    "proxyUrl": "http://user:password@ip:port",
+    "eh": "192.168.50.11"
+}
+{
+    "name": "ss",
+    "proxyUrl": "ss:// method:password@ip:port",
+    "eh": "192.168.50.11"
+}
+功能类似于链式代理：
+"name": 定义一个出站器的名称（这是唯一值不可重复，设计管理面板时候应该给一个排序和容易识别他的意义的方式），
+"proxyUrl": 可以为socks5/http/shadowsocks 三种协议，其中socks5和http是类似的，shadowsocks是另一种方式
+"eh": 为选择一个内网ip作为使用IP，如果此出站器作为后面的用户的出站器，则使用这个内网IP绑定的代理的实际IP与互联网进行通信
+
+3：规则功能
+{
+    "name": "all",
+    "data": "* = allow"
+}
+
+可以支持的各种方式
+* = allow 不限制
+baid?.com:* = allow 只能访问匹配的域  *=端口
+allow反之=flase
+
+4：用户功能
+
+{
+    "enable": true,
+    "listenAddr": "192.168.50.11:1876",//可以绑定内网ip和本机的一个端口
+    "protocol": "socks5",协议选择（我们选择socks5时候，实现的代理会兼容http）
+    "deleteTime": "2026-01-02 15:04:05",（用户到期时间）
+    "maxSendByte": 0,（限制流量字节功能）
+    "maxReceiveByte": 0,（限制流量字节功能）
+    "sendByte": 0,
+    "receiveByte": 0,
+    "maxConnCount": 0,（限制连接数功能）
+    "sendLimit": 177,（限制带宽功能）
+    "receiveLimit": 200,（限制带宽功能）
+    "rule": [
+        "all"（使用的规则名，可以为多个）
+    ],
+    "out": "test",（使用的出站器名）
+    "conf": {
+        "username": "abc",(代理的用户名)
+        "password": "abc"（代理的密码）
+    }
+}
+
+其中conf有两种使用方式：
+1：socks5/http
+    "conf": {
+        "username": "abc",(代理的用户名)
+        "password": "abc"（代理的密码）
+2:ss
+    "conf": {
+        "username": "aes-128-gcm",（加密方式)支持aes-128-gcm/aes-256-gcm/chacha20-ietf-poly1305
+        "password": "abc"（代理的密码）
+
+以上就是我们系统的主要功能。
+请你要明白，一种是 我们让本机的各个ip成为出站器，然后用用户功能把他制作为代理节点。
+另一种是链式代理，让外部ip成为出站器，然后用用户功能制作成代理节点（访问互联网实际会使用外部IP作为访问IP）

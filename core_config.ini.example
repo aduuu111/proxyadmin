@@ -1,0 +1,14 @@
+[core_service]
+# Core Service API Configuration
+# 核心代理服务器 API 配置
+
+# API Endpoint / API 端点
+# Example: http://your-server-ip:port
+api_url = http://127.0.0.1:8080
+
+# API Key / API 密钥
+# Get this from your core service
+api_key = your-api-key-here
+
+# Request Timeout (seconds) / 请求超时时间（秒）
+timeout = 10
