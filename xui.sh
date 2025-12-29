@@ -17,7 +17,7 @@ NC='\033[0m' # No Color
 # Configuration
 INSTALL_DIR="/opt/proxyadmin"
 SERVICE_NAME="proxyadmin"
-REPO_URL="https://github.com/yourusername/proxyadmin.git"  # Update this with your repo
+REPO_URL="https://github.com/aduuu111/proxyadmin.git"
 DOWNLOAD_URL="http://47.129.171.69/downloads/proxyadmin.tar.gz"
 USE_GIT=true  # Set to false to use download URL instead
 

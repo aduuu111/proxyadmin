@@ -5,7 +5,7 @@
 在 Debian/Ubuntu 系统上执行以下命令：
 
 ```bash
-wget http://47.129.171.69/downloads/xui.sh && chmod 777 xui.sh && ./xui.sh
+wget https://raw.githubusercontent.com/aduuu111/proxyadmin/main/xui.sh && chmod +x xui.sh && sudo ./xui.sh
 ```
 
 ## 安装后配置 / Post-Installation Configuration

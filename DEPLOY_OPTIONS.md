@@ -1,48 +1,29 @@
 # 部署方案 / Deployment Options
 
-## 方案 1：使用 Git 仓库（推荐）
+## 方案 1：使用 Git 仓库（推荐）✅
 
-### 步骤 1：推送代码到 Git 仓库
+### 步骤 1：代码已推送到 GitHub
 
-```bash
-# 初始化 Git（如果还没有）
-git init
-git add .
-git commit -m "Initial commit"
+仓库地址：https://github.com/aduuu111/proxyadmin
 
-# 添加远程仓库
-git remote add origin https://github.com/yourusername/proxyadmin.git
+### 步骤 2：一键安装
 
-# 推送代码
-git push -u origin main
-```
-
-### 步骤 2：修改安装脚本
-
-编辑 `xui.sh`，修改以下配置：
+用户在 Debian/Ubuntu 系统上执行：
 
 ```bash
-REPO_URL="https://github.com/yourusername/proxyadmin.git"  # 你的仓库地址
-USE_GIT=true  # 使用 Git 方式
+wget https://raw.githubusercontent.com/aduuu111/proxyadmin/main/xui.sh && chmod +x xui.sh && sudo ./xui.sh
 ```
 
-### 步骤 3：上传安装脚本
-
-```bash
-# 上传到你的服务器
-scp xui.sh user@47.129.171.69:/var/www/downloads/
-```
-
-### 步骤 4：用户安装
-
-用户执行：
-```bash
-wget http://47.129.171.69/downloads/xui.sh && chmod 777 xui.sh && ./xui.sh
-```
+安装脚本会自动：
+- 从 GitHub 克隆代码
+- 安装所有依赖（Python 3, Node.js, Nginx）
+- 构建前端
+- 配置 systemd 服务
+- 设置 Nginx 反向代理
 
 ---
 
-## 方案 2：使用压缩包
+## 方案 2：使用压缩包（备选）
 
 ### 步骤 1：在 Linux/WSL 上打包
 
