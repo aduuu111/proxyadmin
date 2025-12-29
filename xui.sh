@@ -17,9 +17,7 @@ NC='\033[0m' # No Color
 # Configuration
 INSTALL_DIR="/opt/proxyadmin"
 SERVICE_NAME="proxyadmin"
-REPO_URL="https://github.com/yourusername/proxyadmin.git"  # Update this with your repo
-DOWNLOAD_URL="http://47.129.171.69/downloads/proxyadmin.tar.gz"
-USE_GIT=true  # Set to false to use download URL instead
+REPO_URL="https://github.com/aduuu111/proxyadmin.git"
 
 echo -e "${GREEN}================================${NC}"
 echo -e "${GREEN}ProxyAdminPanel Installer${NC}"
@@ -81,16 +79,8 @@ mkdir -p $INSTALL_DIR
 cd $INSTALL_DIR
 
 # Download and extract project
-echo -e "${YELLOW}Downloading project files...${NC}"
-if [ "$USE_GIT" = true ]; then
-    echo -e "${YELLOW}Cloning from Git repository...${NC}"
-    git clone $REPO_URL .
-else
-    echo -e "${YELLOW}Downloading from URL...${NC}"
-    wget -q $DOWNLOAD_URL -O proxyadmin.tar.gz
-    tar -xzf proxyadmin.tar.gz
-    rm proxyadmin.tar.gz
-fi
+echo -e "${YELLOW}Cloning from GitHub repository...${NC}"
+git clone $REPO_URL .
 
 # Create Python virtual environment
 echo -e "${YELLOW}Setting up Python virtual environment...${NC}"
