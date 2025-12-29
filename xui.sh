@@ -63,9 +63,9 @@ apt-get install -y -qq \
     git \
     sqlite3
 
-# Install Node.js 18.x
-if ! command -v node &> /dev/null; then
-    echo -e "${YELLOW}Installing Node.js...${NC}"
+# Install Node.js 18.x and npm
+if ! command -v node &> /dev/null || ! command -v npm &> /dev/null; then
+    echo -e "${YELLOW}Installing Node.js and npm...${NC}"
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
     apt-get install -y -qq nodejs
 fi
