@@ -89,12 +89,11 @@ git clone $REPO_URL .
 # Create Python virtual environment
 echo -e "${YELLOW}Setting up Python virtual environment...${NC}"
 python3 -m venv venv
-source venv/bin/activate
 
 # Install Python dependencies
 echo -e "${YELLOW}Installing Python dependencies...${NC}"
-pip install -q --upgrade pip
-pip install -q -r requirements.txt
+./venv/bin/pip install -q --upgrade pip
+./venv/bin/pip install -q -r requirements.txt
 
 # Build frontend
 echo -e "${YELLOW}Building frontend...${NC}"
@@ -116,7 +115,7 @@ fi
 
 # Initialize database
 echo -e "${YELLOW}Initializing database...${NC}"
-python init_db.py
+./venv/bin/python init_db.py
 
 # Install systemd service
 echo -e "${YELLOW}Installing systemd service...${NC}"
