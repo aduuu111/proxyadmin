@@ -74,7 +74,11 @@ echo -e "${GREEN}Node.js version: $(node --version)${NC}"
 echo -e "${GREEN}npm version: $(npm --version)${NC}"
 
 # Create installation directory
-echo -e "${YELLOW}Creating installation directory...${NC}"
+echo -e "${YELLOW}Preparing installation directory...${NC}"
+if [ -d "$INSTALL_DIR" ]; then
+    echo -e "${YELLOW}Removing existing installation...${NC}"
+    rm -rf $INSTALL_DIR
+fi
 mkdir -p $INSTALL_DIR
 cd $INSTALL_DIR
 
