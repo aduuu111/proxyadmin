@@ -109,7 +109,7 @@ mkdir -p /etc/proxyadmin
 
 # Copy core config if not exists
 if [ ! -f /etc/proxyadmin/core_config.ini ]; then
-    cp core_config.ini /etc/proxyadmin/core_config.ini
+    cp core_config.ini.example /etc/proxyadmin/core_config.ini
     echo -e "${YELLOW}Configuration file created at: /etc/proxyadmin/core_config.ini${NC}"
     echo -e "${YELLOW}Please edit this file to configure your core service connection${NC}"
 fi
